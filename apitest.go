@@ -119,8 +119,8 @@ func New(opts ...SDKOption) *Apitest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-12-05",
-			SDKVersion:        "1.0.0",
-			GenVersion:        "2.75.2",
+			SDKVersion:        "1.1.0",
+			GenVersion:        "2.89.1",
 		},
 	}
 	for _, opt := range opts {
@@ -140,7 +140,7 @@ func New(opts ...SDKOption) *Apitest {
 
 // ExportFileByBranch - exportFileByBranch
 // Exports an OpenAPI or JSON Schema file from a Stoplight project that exists on the specified branch.
-func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.ExportFileByBranchRequest, security operations.ExportFileByBranchSecurity) (*operations.ExportFileByBranchResponse, error) {
+func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.ExportFileByBranchRequest, security operations.ExportFileByBranchSecurity, opts ...operations.Option) (*operations.ExportFileByBranchResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/projects/{project_id}/branches/{branch_name}/export/{file_path}", request, nil)
 	if err != nil {
@@ -151,7 +151,12 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/problem+json;q=0.7, application/yaml;q=0")
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/problem+json;q=0.7, application/yaml;q=0")
+	}
+
 	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	utils.PopulateHeaders(ctx, req, request)
@@ -334,7 +339,7 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 
 // ExportFileByCommit - exportFileByCommit
 // Exports an OpenAPI or JSON Schema file from a Stoplight project that exists on the specified commit.
-func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.ExportFileByCommitRequest, security operations.ExportFileByCommitSecurity) (*operations.ExportFileByCommitResponse, error) {
+func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.ExportFileByCommitRequest, security operations.ExportFileByCommitSecurity, opts ...operations.Option) (*operations.ExportFileByCommitResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/projects/{project_id}/commits/{commit_hash}/export/{file_path}", request, nil)
 	if err != nil {
@@ -345,7 +350,12 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "application/json;q=1, application/problem+json;q=0.7, application/yaml;q=0")
+	if o.AcceptHeaderOverride != nil {
+		req.Header.Set("Accept", string(*o.AcceptHeaderOverride))
+	} else {
+		req.Header.Set("Accept", "application/json;q=1, application/problem+json;q=0.7, application/yaml;q=0")
+	}
+
 	req.Header.Set("user-agent", fmt.Sprintf("speakeasy-sdk/%s %s %s %s", s.sdkConfiguration.Language, s.sdkConfiguration.SDKVersion, s.sdkConfiguration.GenVersion, s.sdkConfiguration.OpenAPIDocVersion))
 
 	utils.PopulateHeaders(ctx, req, request)
