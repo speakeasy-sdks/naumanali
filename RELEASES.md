@@ -17,3 +17,13 @@ Based on:
 - [go v1.1.0] .
 ### Releases
 - [Go v1.1.0] https://github.com/speakeasy-sdks/naumanali/releases/tag/v1.1.0 - .
+
+## 2023-09-08 01:04:23
+### Changes
+Based on:
+- OpenAPI Doc 2022-12-05 
+- Speakeasy CLI 1.82.0 (2.107.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.2.0] .
+### Releases
+- [Go v1.2.0] https://github.com/speakeasy-sdks/naumanali/releases/tag/v1.2.0 - .
