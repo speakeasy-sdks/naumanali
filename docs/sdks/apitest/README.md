@@ -33,17 +33,17 @@ import(
 )
 
 func main() {
-    s := apitest.New()
+    s := naumanali.New()
     operationSecurity := operations.ExportFileByBranchSecurity{
             Authorization: "",
         }
 
     ctx := context.Background()
     res, err := s.Apitest.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
-        StoplightVersion: operations.ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
+        StoplightVersion: naumanali.String("2022-12-05"),
         BranchName: "quibusdam",
         FilePath: "unde",
-        IncludeInternal: apitest.Bool(false),
+        IncludeInternal: naumanali.Bool(false),
         ProjectID: "nulla",
     }, operationSecurity)
     if err != nil {
@@ -87,17 +87,17 @@ import(
 )
 
 func main() {
-    s := apitest.New()
+    s := naumanali.New()
     operationSecurity := operations.ExportFileByCommitSecurity{
             Authorization: "",
         }
 
     ctx := context.Background()
     res, err := s.Apitest.ExportFileByCommit(ctx, operations.ExportFileByCommitRequest{
-        StoplightVersion: operations.ExportFileByCommitStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
+        StoplightVersion: naumanali.String("2022-12-05"),
         CommitHash: "corrupti",
         FilePath: "illum",
-        IncludeInternal: apitest.Bool(false),
+        IncludeInternal: naumanali.Bool(false),
         ProjectID: "vel",
     }, operationSecurity)
     if err != nil {

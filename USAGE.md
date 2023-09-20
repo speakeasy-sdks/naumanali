@@ -12,17 +12,17 @@ import(
 )
 
 func main() {
-    s := apitest.New()
+    s := naumanali.New()
     operationSecurity := operations.ExportFileByBranchSecurity{
             Authorization: "",
         }
 
     ctx := context.Background()
     res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
-        StoplightVersion: operations.ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
+        StoplightVersion: naumanali.String("2022-12-05"),
         BranchName: "corrupti",
         FilePath: "provident",
-        IncludeInternal: apitest.Bool(false),
+        IncludeInternal: naumanali.Bool(false),
         ProjectID: "distinctio",
     }, operationSecurity)
     if err != nil {

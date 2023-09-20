@@ -9,6 +9,7 @@ pkg/types/decimal.go
 pkg/utils/contenttype.go
 pkg/utils/form.go
 pkg/utils/headers.go
+pkg/utils/json.go
 pkg/utils/pathparams.go
 pkg/utils/queryparams.go
 pkg/utils/requestbody.go
@@ -31,11 +32,9 @@ pkg/models/shared/invalidparameter.go
 docs/sdks/apitest/README.md
 USAGE.md
 docs/models/operations/exportfilebybranchsecurity.md
-docs/models/operations/exportfilebybranchstoplightversionstoplightapiversionstring.md
 docs/models/operations/exportfilebybranchrequest.md
 docs/models/operations/exportfilebybranchresponse.md
 docs/models/operations/exportfilebycommitsecurity.md
-docs/models/operations/exportfilebycommitstoplightversionstoplightapiversionstring.md
 docs/models/operations/exportfilebycommitrequest.md
 docs/models/operations/exportfilebycommitresponse.md
 docs/models/shared/unauthorizedproblemdetailproblemdetailstatus.md
