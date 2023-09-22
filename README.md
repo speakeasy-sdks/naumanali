@@ -10,8 +10,6 @@ go get github.com/speakeasy-sdks/naumanali
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
-
-
 ```go
 package main
 
@@ -19,23 +17,25 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/naumanali"
+	"github.com/speakeasy-sdks/naumanali/pkg/models/shared"
 	"github.com/speakeasy-sdks/naumanali/pkg/models/operations"
 )
 
 func main() {
-    s := apitest.New()
-    operationSecurity := operations.ExportFileByBranchSecurity{
+    s := naumanali.New(
+        naumanali.WithSecurity(shared.Security{
             Authorization: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
-        StoplightVersion: operations.ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
-        BranchName: "corrupti",
-        FilePath: "provident",
-        IncludeInternal: apitest.Bool(false),
-        ProjectID: "distinctio",
-    }, operationSecurity)
+        StoplightVersion: naumanali.String("2022-12-05"),
+        BranchName: "quibusdam",
+        FilePath: "unde",
+        IncludeInternal: naumanali.Bool(false),
+        ProjectID: "nulla",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -55,6 +55,38 @@ func main() {
 * [ExportFileByBranch](docs/sdks/apitest/README.md#exportfilebybranch) - exportFileByBranch
 * [ExportFileByCommit](docs/sdks/apitest/README.md#exportfilebycommit) - exportFileByCommit
 <!-- End SDK Available Operations -->
+
+
+
+<!-- Start Dev Containers -->
+
+
+
+<!-- End Dev Containers -->
+
+
+
+<!-- Start Pagination -->
+# Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `nil`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+
+
+<!-- End Pagination -->
+
+
+
+<!-- Start Go Types -->
+
+<!-- End Go Types -->
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->
+
+
 
 ### Maturity
 

@@ -8,23 +8,25 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/naumanali"
+	"github.com/speakeasy-sdks/naumanali/pkg/models/shared"
 	"github.com/speakeasy-sdks/naumanali/pkg/models/operations"
 )
 
 func main() {
-    s := apitest.New()
-    operationSecurity := operations.ExportFileByBranchSecurity{
+    s := naumanali.New(
+        naumanali.WithSecurity(shared.Security{
             Authorization: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
-        StoplightVersion: operations.ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
+        StoplightVersion: naumanali.String("2022-12-05"),
         BranchName: "corrupti",
         FilePath: "provident",
-        IncludeInternal: apitest.Bool(false),
+        IncludeInternal: naumanali.Bool(false),
         ProjectID: "distinctio",
-    }, operationSecurity)
+    })
     if err != nil {
         log.Fatal(err)
     }

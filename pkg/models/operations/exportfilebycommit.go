@@ -3,66 +3,38 @@
 package operations
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/speakeasy-sdks/naumanali/pkg/models/shared"
+	"github.com/speakeasy-sdks/naumanali/pkg/types"
+	"github.com/speakeasy-sdks/naumanali/pkg/utils"
 	"net/http"
 )
 
-type ExportFileByCommitSecurity struct {
-	Authorization string `security:"scheme,type=http,subtype=bearer,name=Authorization"`
-}
-
-func (o *ExportFileByCommitSecurity) GetAuthorization() string {
-	if o == nil {
-		return ""
-	}
-	return o.Authorization
-}
-
-// ExportFileByCommitStoplightVersionStoplightAPIVersionString - A string representing the Stoplight API version that is being requested. If not supplied: TODO document policy
-type ExportFileByCommitStoplightVersionStoplightAPIVersionString string
-
-const (
-	ExportFileByCommitStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205 ExportFileByCommitStoplightVersionStoplightAPIVersionString = "2022-12-05"
-)
-
-func (e ExportFileByCommitStoplightVersionStoplightAPIVersionString) ToPointer() *ExportFileByCommitStoplightVersionStoplightAPIVersionString {
-	return &e
-}
-
-func (e *ExportFileByCommitStoplightVersionStoplightAPIVersionString) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "2022-12-05":
-		*e = ExportFileByCommitStoplightVersionStoplightAPIVersionString(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ExportFileByCommitStoplightVersionStoplightAPIVersionString: %v", v)
-	}
-}
-
 type ExportFileByCommitRequest struct {
 	// A string representing the Stoplight API version that is being requested. If not supplied: TODO document policy
-	StoplightVersion *ExportFileByCommitStoplightVersionStoplightAPIVersionString `header:"style=simple,explode=false,name=Stoplight-Version"`
+	stoplightVersion *string `const:"2022-12-05" header:"style=simple,explode=false,name=Stoplight-Version"`
 	// A reference to a commit or change in a Stoplight project.
 	CommitHash string `pathParam:"style=simple,explode=false,name=commit_hash"`
 	// A path to a file in a Stoplight project. Use forward slashes (`/`) to separate path directories.
 	FilePath string `pathParam:"style=simple,explode=false,name=file_path"`
 	// When `false`, indicates that any declaration (schema, operation, property, etc.) in the OpenAPI or JSON Schema marked with the `x-internal` extension property set to `true` will be omitted from the exported file. Setting this parameter to `true` with an anonymous or workspace guest user caller results in an error response.
-	IncludeInternal *bool `queryParam:"style=form,explode=true,name=include_internal"`
+	IncludeInternal *bool `default:"true" queryParam:"style=form,explode=true,name=include_internal"`
 	// A string that uniquely identifies a Stoplight Project resource. This can be found in the [Project Settings](https://docs.stoplight.io/docs/platform/252039ebe8fb2-project-settings) page.
 	ProjectID string `pathParam:"style=simple,explode=false,name=project_id"`
 }
 
-func (o *ExportFileByCommitRequest) GetStoplightVersion() *ExportFileByCommitStoplightVersionStoplightAPIVersionString {
-	if o == nil {
-		return nil
+func (e ExportFileByCommitRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *ExportFileByCommitRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+		return err
 	}
-	return o.StoplightVersion
+	return nil
+}
+
+func (o *ExportFileByCommitRequest) GetStoplightVersion() *string {
+	return types.String("2022-12-05")
 }
 
 func (o *ExportFileByCommitRequest) GetCommitHash() string {

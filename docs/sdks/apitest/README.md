@@ -29,23 +29,25 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/naumanali"
+	"github.com/speakeasy-sdks/naumanali/pkg/models/shared"
 	"github.com/speakeasy-sdks/naumanali/pkg/models/operations"
 )
 
 func main() {
-    s := apitest.New()
-    operationSecurity := operations.ExportFileByBranchSecurity{
+    s := naumanali.New(
+        naumanali.WithSecurity(shared.Security{
             Authorization: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Apitest.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
-        StoplightVersion: operations.ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
-        BranchName: "quibusdam",
-        FilePath: "unde",
-        IncludeInternal: apitest.Bool(false),
-        ProjectID: "nulla",
-    }, operationSecurity)
+        StoplightVersion: naumanali.String("2022-12-05"),
+        BranchName: "corrupti",
+        FilePath: "illum",
+        IncludeInternal: naumanali.Bool(false),
+        ProjectID: "vel",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -58,11 +60,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.ExportFileByBranchRequest](../../models/operations/exportfilebybranchrequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `security`                                                                                     | [operations.ExportFileByBranchSecurity](../../models/operations/exportfilebybranchsecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.ExportFileByBranchRequest](../../models/operations/exportfilebybranchrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 
 
 ### Response
@@ -83,23 +84,25 @@ import(
 	"context"
 	"log"
 	"github.com/speakeasy-sdks/naumanali"
+	"github.com/speakeasy-sdks/naumanali/pkg/models/shared"
 	"github.com/speakeasy-sdks/naumanali/pkg/models/operations"
 )
 
 func main() {
-    s := apitest.New()
-    operationSecurity := operations.ExportFileByCommitSecurity{
+    s := naumanali.New(
+        naumanali.WithSecurity(shared.Security{
             Authorization: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Apitest.ExportFileByCommit(ctx, operations.ExportFileByCommitRequest{
-        StoplightVersion: operations.ExportFileByCommitStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
-        CommitHash: "corrupti",
-        FilePath: "illum",
-        IncludeInternal: apitest.Bool(false),
-        ProjectID: "vel",
-    }, operationSecurity)
+        StoplightVersion: naumanali.String("2022-12-05"),
+        CommitHash: "error",
+        FilePath: "deserunt",
+        IncludeInternal: naumanali.Bool(false),
+        ProjectID: "suscipit",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -112,11 +115,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.ExportFileByCommitRequest](../../models/operations/exportfilebycommitrequest.md)   | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `security`                                                                                     | [operations.ExportFileByCommitSecurity](../../models/operations/exportfilebycommitsecurity.md) | :heavy_check_mark:                                                                             | The security requirements to use for the request.                                              |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.ExportFileByCommitRequest](../../models/operations/exportfilebycommitrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 
 
 ### Response

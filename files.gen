@@ -6,9 +6,11 @@ pkg/types/bigint.go
 pkg/types/date.go
 pkg/types/datetime.go
 pkg/types/decimal.go
+pkg/types/pointers.go
 pkg/utils/contenttype.go
 pkg/utils/form.go
 pkg/utils/headers.go
+pkg/utils/json.go
 pkg/utils/pathparams.go
 pkg/utils/queryparams.go
 pkg/utils/requestbody.go
@@ -28,14 +30,10 @@ pkg/models/shared/exportproblem.go
 pkg/models/shared/conflictproblemdetail.go
 pkg/models/shared/badrequestproblemdetail.go
 pkg/models/shared/invalidparameter.go
-docs/sdks/apitest/README.md
+pkg/models/shared/security.go
 USAGE.md
-docs/models/operations/exportfilebybranchsecurity.md
-docs/models/operations/exportfilebybranchstoplightversionstoplightapiversionstring.md
 docs/models/operations/exportfilebybranchrequest.md
 docs/models/operations/exportfilebybranchresponse.md
-docs/models/operations/exportfilebycommitsecurity.md
-docs/models/operations/exportfilebycommitstoplightversionstoplightapiversionstring.md
 docs/models/operations/exportfilebycommitrequest.md
 docs/models/operations/exportfilebycommitresponse.md
 docs/models/shared/unauthorizedproblemdetailproblemdetailstatus.md
@@ -59,5 +57,7 @@ docs/models/shared/badrequestproblemdetailproblemdetailstatus.md
 docs/models/shared/badrequestproblemdetail.md
 docs/models/shared/invalidparameterin.md
 docs/models/shared/invalidparameter.md
+docs/models/shared/security.md
+docs/sdks/apitest/README.md
 pkg/models/operations/options.go
 .gitattributes
