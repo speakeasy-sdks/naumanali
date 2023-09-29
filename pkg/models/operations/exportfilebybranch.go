@@ -71,7 +71,8 @@ type ExportFileByBranchResponse struct {
 	Body                    []byte
 	// This response is sent when a request conflicts with the current state of the server.
 	ConflictProblemDetail *shared.ConflictProblemDetail
-	ContentType           string
+	// HTTP response content type for this operation
+	ContentType string
 	// The server could not export the file contents requested.
 	ExportFileFailedProblemDetail *shared.ExportFileFailedProblemDetail
 	// The client does not have permissions to access the content.
@@ -83,8 +84,10 @@ type ExportFileByBranchResponse struct {
 	NotFoundProblemDetail *shared.NotFoundProblemDetail
 	// The client needs to provide payment to access the request content.
 	PaymentRequiredProblemDetail *shared.PaymentRequiredProblemDetail
-	StatusCode                   int
-	RawResponse                  *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// This response is sent when the client has exhausted the request quota.
 	TooManyRequestsProblemDetail *shared.TooManyRequestsProblemDetail
 	// The client must authenticate itself to get the requested response.

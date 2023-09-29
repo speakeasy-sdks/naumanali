@@ -1,5 +1,6 @@
 # Apitest SDK
 
+
 ## Overview
 
 Stoplight Catalog API: The Catalog API provides [bundled exports](https://docs.stoplight.io/docs/platform/37d160068e33c-export-api-files#ref-options) of your OpenAPI and JSON Schema files. A bundled export resolves remote `$refs` once, and then reuses references to the same objects to avoid repetition and produce a cleaner file.
@@ -43,10 +44,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Apitest.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
         StoplightVersion: naumanali.String("2022-12-05"),
-        BranchName: "corrupti",
-        FilePath: "illum",
+        BranchName: "Auto",
+        FilePath: "/etc/defaults/sausages_east.c4p",
         IncludeInternal: naumanali.Bool(false),
-        ProjectID: "vel",
+        ProjectID: "sievert Applications Bike",
     })
     if err != nil {
         log.Fatal(err)
@@ -98,10 +99,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Apitest.ExportFileByCommit(ctx, operations.ExportFileByCommitRequest{
         StoplightVersion: naumanali.String("2022-12-05"),
-        CommitHash: "error",
-        FilePath: "deserunt",
+        CommitHash: "Frozen",
+        FilePath: "/boot/sore_account_east.oxt",
         IncludeInternal: naumanali.Bool(false),
-        ProjectID: "suscipit",
+        ProjectID: "Cambridgeshire Classical",
     })
     if err != nil {
         log.Fatal(err)

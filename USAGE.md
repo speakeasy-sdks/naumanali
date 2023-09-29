@@ -22,10 +22,10 @@ func main() {
     ctx := context.Background()
     res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
         StoplightVersion: naumanali.String("2022-12-05"),
-        BranchName: "corrupti",
-        FilePath: "provident",
+        BranchName: "Auto",
+        FilePath: "/etc/defaults/sausages_east.c4p",
         IncludeInternal: naumanali.Bool(false),
-        ProjectID: "distinctio",
+        ProjectID: "sievert Applications Bike",
     })
     if err != nil {
         log.Fatal(err)

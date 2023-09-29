@@ -31,10 +31,10 @@ func main() {
     ctx := context.Background()
     res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
         StoplightVersion: naumanali.String("2022-12-05"),
-        BranchName: "quibusdam",
-        FilePath: "unde",
+        BranchName: "Auto",
+        FilePath: "/etc/defaults/sausages_east.c4p",
         IncludeInternal: naumanali.Bool(false),
-        ProjectID: "nulla",
+        ProjectID: "sievert Applications Bike",
     })
     if err != nil {
         log.Fatal(err)
@@ -60,8 +60,6 @@ func main() {
 
 <!-- Start Dev Containers -->
 
-
-
 <!-- End Dev Containers -->
 
 
@@ -74,8 +72,6 @@ returned response object will have a `Next` method that can be called to pull do
 return value of `Next` is `nil`, then there are no more pages to be fetched.
 
 Here's an example of one such pagination call:
-
-
 <!-- End Pagination -->
 
 
