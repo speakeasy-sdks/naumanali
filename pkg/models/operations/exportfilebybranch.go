@@ -3,15 +3,41 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/speakeasy-sdks/naumanali/pkg/models/shared"
-	"github.com/speakeasy-sdks/naumanali/pkg/types"
 	"github.com/speakeasy-sdks/naumanali/pkg/utils"
 	"net/http"
 )
 
+// ExportFileByBranchStoplightVersionStoplightAPIVersionString - A string representing the Stoplight API version that is being requested. If not supplied: TODO document policy
+type ExportFileByBranchStoplightVersionStoplightAPIVersionString string
+
+const (
+	ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205 ExportFileByBranchStoplightVersionStoplightAPIVersionString = "2022-12-05"
+)
+
+func (e ExportFileByBranchStoplightVersionStoplightAPIVersionString) ToPointer() *ExportFileByBranchStoplightVersionStoplightAPIVersionString {
+	return &e
+}
+
+func (e *ExportFileByBranchStoplightVersionStoplightAPIVersionString) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "2022-12-05":
+		*e = ExportFileByBranchStoplightVersionStoplightAPIVersionString(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ExportFileByBranchStoplightVersionStoplightAPIVersionString: %v", v)
+	}
+}
+
 type ExportFileByBranchRequest struct {
 	// A string representing the Stoplight API version that is being requested. If not supplied: TODO document policy
-	stoplightVersion *string `const:"2022-12-05" header:"style=simple,explode=false,name=Stoplight-Version"`
+	StoplightVersion *ExportFileByBranchStoplightVersionStoplightAPIVersionString `header:"style=simple,explode=false,name=Stoplight-Version"`
 	// A reference to a branch tracked by a Stoplight project. Must be percent encoded.
 	BranchName string `pathParam:"style=simple,explode=false,name=branch_name"`
 	// A path to a file in a Stoplight project. Use forward slashes (`/`) to separate path directories.
@@ -33,8 +59,11 @@ func (e *ExportFileByBranchRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ExportFileByBranchRequest) GetStoplightVersion() *string {
-	return types.String("2022-12-05")
+func (o *ExportFileByBranchRequest) GetStoplightVersion() *ExportFileByBranchStoplightVersionStoplightAPIVersionString {
+	if o == nil {
+		return nil
+	}
+	return o.StoplightVersion
 }
 
 func (o *ExportFileByBranchRequest) GetBranchName() string {

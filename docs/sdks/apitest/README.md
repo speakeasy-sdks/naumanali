@@ -43,7 +43,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apitest.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
-        StoplightVersion: naumanali.String("2022-12-05"),
+        StoplightVersion: operations.ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
         BranchName: "Auto",
         FilePath: "/etc/defaults/sausages_east.c4p",
         IncludeInternal: naumanali.Bool(false),
@@ -98,7 +98,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Apitest.ExportFileByCommit(ctx, operations.ExportFileByCommitRequest{
-        StoplightVersion: naumanali.String("2022-12-05"),
+        StoplightVersion: operations.ExportFileByCommitStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
         CommitHash: "Frozen",
         FilePath: "/boot/sore_account_east.oxt",
         IncludeInternal: naumanali.Bool(false),

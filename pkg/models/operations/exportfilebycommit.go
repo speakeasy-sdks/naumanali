@@ -3,15 +3,41 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/speakeasy-sdks/naumanali/pkg/models/shared"
-	"github.com/speakeasy-sdks/naumanali/pkg/types"
 	"github.com/speakeasy-sdks/naumanali/pkg/utils"
 	"net/http"
 )
 
+// ExportFileByCommitStoplightVersionStoplightAPIVersionString - A string representing the Stoplight API version that is being requested. If not supplied: TODO document policy
+type ExportFileByCommitStoplightVersionStoplightAPIVersionString string
+
+const (
+	ExportFileByCommitStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205 ExportFileByCommitStoplightVersionStoplightAPIVersionString = "2022-12-05"
+)
+
+func (e ExportFileByCommitStoplightVersionStoplightAPIVersionString) ToPointer() *ExportFileByCommitStoplightVersionStoplightAPIVersionString {
+	return &e
+}
+
+func (e *ExportFileByCommitStoplightVersionStoplightAPIVersionString) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "2022-12-05":
+		*e = ExportFileByCommitStoplightVersionStoplightAPIVersionString(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ExportFileByCommitStoplightVersionStoplightAPIVersionString: %v", v)
+	}
+}
+
 type ExportFileByCommitRequest struct {
 	// A string representing the Stoplight API version that is being requested. If not supplied: TODO document policy
-	stoplightVersion *string `const:"2022-12-05" header:"style=simple,explode=false,name=Stoplight-Version"`
+	StoplightVersion *ExportFileByCommitStoplightVersionStoplightAPIVersionString `header:"style=simple,explode=false,name=Stoplight-Version"`
 	// A reference to a commit or change in a Stoplight project.
 	CommitHash string `pathParam:"style=simple,explode=false,name=commit_hash"`
 	// A path to a file in a Stoplight project. Use forward slashes (`/`) to separate path directories.
@@ -33,8 +59,11 @@ func (e *ExportFileByCommitRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ExportFileByCommitRequest) GetStoplightVersion() *string {
-	return types.String("2022-12-05")
+func (o *ExportFileByCommitRequest) GetStoplightVersion() *ExportFileByCommitStoplightVersionStoplightAPIVersionString {
+	if o == nil {
+		return nil
+	}
+	return o.StoplightVersion
 }
 
 func (o *ExportFileByCommitRequest) GetCommitHash() string {

@@ -32,8 +32,10 @@ pkg/models/shared/badrequestproblemdetail.go
 pkg/models/shared/invalidparameter.go
 pkg/models/shared/security.go
 USAGE.md
+docs/models/operations/exportfilebybranchstoplightversionstoplightapiversionstring.md
 docs/models/operations/exportfilebybranchrequest.md
 docs/models/operations/exportfilebybranchresponse.md
+docs/models/operations/exportfilebycommitstoplightversionstoplightapiversionstring.md
 docs/models/operations/exportfilebycommitrequest.md
 docs/models/operations/exportfilebycommitresponse.md
 docs/models/shared/unauthorizedproblemdetailproblemdetailstatus.md

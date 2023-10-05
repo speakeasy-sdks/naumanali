@@ -30,7 +30,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
-        StoplightVersion: naumanali.String("2022-12-05"),
+        StoplightVersion: operations.ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
         BranchName: "Auto",
         FilePath: "/etc/defaults/sausages_east.c4p",
         IncludeInternal: naumanali.Bool(false),
