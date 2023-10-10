@@ -36,9 +36,7 @@ import(
 
 func main() {
     s := naumanali.New(
-        naumanali.WithSecurity(shared.Security{
-            Authorization: "",
-        }),
+        naumanali.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -46,7 +44,6 @@ func main() {
         StoplightVersion: operations.ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
         BranchName: "Auto",
         FilePath: "/etc/defaults/sausages_east.c4p",
-        IncludeInternal: naumanali.Bool(false),
         ProjectID: "sievert Applications Bike",
     })
     if err != nil {
@@ -91,9 +88,7 @@ import(
 
 func main() {
     s := naumanali.New(
-        naumanali.WithSecurity(shared.Security{
-            Authorization: "",
-        }),
+        naumanali.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -101,7 +96,6 @@ func main() {
         StoplightVersion: operations.ExportFileByCommitStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
         CommitHash: "Frozen",
         FilePath: "/boot/sore_account_east.oxt",
-        IncludeInternal: naumanali.Bool(false),
         ProjectID: "Cambridgeshire Classical",
     })
     if err != nil {

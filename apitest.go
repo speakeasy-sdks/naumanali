@@ -114,6 +114,7 @@ func WithClient(client HTTPClient) SDKOption {
 		sdk.sdkConfiguration.DefaultClient = client
 	}
 }
+
 func withSecurity(security interface{}) func(context.Context) (interface{}, error) {
 	return func(context.Context) (interface{}, error) {
 		return &security, nil
@@ -121,18 +122,11 @@ func withSecurity(security interface{}) func(context.Context) (interface{}, erro
 }
 
 // WithSecurity configures the SDK to use the provided security details
-func WithSecurity(security shared.Security) SDKOption {
-	return func(sdk *Apitest) {
-		sdk.sdkConfiguration.Security = withSecurity(security)
-	}
-}
 
-// WithSecuritySource configures the SDK to invoke the Security Source function on each method call to determine authentication
-func WithSecuritySource(security func(context.Context) (shared.Security, error)) SDKOption {
+func WithSecurity(authorization string) SDKOption {
 	return func(sdk *Apitest) {
-		sdk.sdkConfiguration.Security = func(ctx context.Context) (interface{}, error) {
-			return security(ctx)
-		}
+		security := shared.Security{Authorization: authorization}
+		sdk.sdkConfiguration.Security = withSecurity(&security)
 	}
 }
 
@@ -148,9 +142,9 @@ func New(opts ...SDKOption) *Apitest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-12-05",
-			SDKVersion:        "1.5.0",
-			GenVersion:        "2.147.0",
-			UserAgent:         "speakeasy-sdk/go 1.5.0 2.147.0 2022-12-05 github.com/speakeasy-sdks/naumanali",
+			SDKVersion:        "1.5.1",
+			GenVersion:        "2.151.2",
+			UserAgent:         "speakeasy-sdk/go 1.5.1 2.151.2 2022-12-05 github.com/speakeasy-sdks/naumanali",
 		},
 	}
 	for _, opt := range opts {
@@ -219,13 +213,6 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 		return nil, fmt.Errorf("error sending request: no response")
 	}
 
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.ExportFileByBranchResponse{
@@ -233,6 +220,13 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 		ContentType: contentType,
 		RawResponse: httpRes,
 	}
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
 	case httpRes.StatusCode == 200:
 		res.Headers = httpRes.Header
@@ -428,13 +422,6 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 		return nil, fmt.Errorf("error sending request: no response")
 	}
 
-	rawBody, err := io.ReadAll(httpRes.Body)
-	if err != nil {
-		return nil, fmt.Errorf("error reading response body: %w", err)
-	}
-	httpRes.Body.Close()
-	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.ExportFileByCommitResponse{
@@ -442,6 +429,13 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 		ContentType: contentType,
 		RawResponse: httpRes,
 	}
+
+	rawBody, err := io.ReadAll(httpRes.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response body: %w", err)
+	}
+	httpRes.Body.Close()
+	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
 	switch {
 	case httpRes.StatusCode == 200:
 		res.Headers = httpRes.Header
