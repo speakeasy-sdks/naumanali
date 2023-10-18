@@ -42,9 +42,9 @@ func main() {
     ctx := context.Background()
     res, err := s.Apitest.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
         StoplightVersion: operations.ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
-        BranchName: "Auto",
-        FilePath: "/etc/defaults/sausages_east.c4p",
-        ProjectID: "sievert Applications Bike",
+        BranchName: "Massachusetts",
+        FilePath: "/usr/libdata/southeast.csp",
+        ProjectID: "yuck",
     })
     if err != nil {
         log.Fatal(err)
@@ -94,9 +94,9 @@ func main() {
     ctx := context.Background()
     res, err := s.Apitest.ExportFileByCommit(ctx, operations.ExportFileByCommitRequest{
         StoplightVersion: operations.ExportFileByCommitStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
-        CommitHash: "Frozen",
-        FilePath: "/boot/sore_account_east.oxt",
-        ProjectID: "Cambridgeshire Classical",
+        CommitHash: "East",
+        FilePath: "/var/spool/fuchsia.jxs",
+        ProjectID: "Account",
     })
     if err != nil {
         log.Fatal(err)
