@@ -29,9 +29,9 @@ func main() {
 	ctx := context.Background()
 	res, err := s.Apitest.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
 		StoplightVersion: operations.ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
-		BranchName:       "Massachusetts",
-		FilePath:         "/usr/libdata/southeast.csp",
-		ProjectID:        "yuck",
+		BranchName:       "string",
+		FilePath:         "/etc/namedb/radian_southeast.csp",
+		ProjectID:        "string",
 	})
 	if err != nil {
 		log.Fatal(err)
