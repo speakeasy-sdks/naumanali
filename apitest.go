@@ -6,10 +6,10 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/naumanali/pkg/models/operations"
-	"github.com/speakeasy-sdks/naumanali/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/naumanali/pkg/models/shared"
-	"github.com/speakeasy-sdks/naumanali/pkg/utils"
+	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
+	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
+	"github.com/speakeasy-sdks/naumanali/v2/pkg/utils"
 	"io"
 	"net/http"
 	"time"
@@ -142,9 +142,9 @@ func New(opts ...SDKOption) *Apitest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-12-05",
-			SDKVersion:        "1.6.0",
-			GenVersion:        "2.169.0",
-			UserAgent:         "speakeasy-sdk/go 1.6.0 2.169.0 2022-12-05 github.com/speakeasy-sdks/naumanali",
+			SDKVersion:        "2.0.0",
+			GenVersion:        "2.181.1",
+			UserAgent:         "speakeasy-sdk/go 2.0.0 2.181.1 2022-12-05 github.com/speakeasy-sdks/naumanali",
 		},
 	}
 	for _, opt := range opts {
@@ -238,7 +238,7 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 				return nil, err
 			}
 
-			res.ExportFileByBranch200ApplicationJSONAny = out
+			res.TwoHundredApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/yaml`):
 			res.Body = rawBody
 		default:
@@ -249,12 +249,11 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.BadRequestProblemDetail
+			var out sdkerrors.BadRequestProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.BadRequestProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -263,12 +262,11 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.UnauthorizedProblemDetail
+			var out sdkerrors.UnauthorizedProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.UnauthorizedProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -277,12 +275,11 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.PaymentRequiredProblemDetail
+			var out sdkerrors.PaymentRequiredProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.PaymentRequiredProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -291,12 +288,11 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.ForbiddenProblemDetail
+			var out sdkerrors.ForbiddenProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.ForbiddenProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -305,12 +301,11 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.NotFoundProblemDetail
+			var out sdkerrors.NotFoundProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.NotFoundProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -319,12 +314,11 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.ConflictProblemDetail
+			var out sdkerrors.ConflictProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.ConflictProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -333,12 +327,11 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.ExportFileFailedProblemDetail
+			var out sdkerrors.ExportFileFailedProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.ExportFileFailedProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -347,26 +340,28 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.TooManyRequestsProblemDetail
+			var out sdkerrors.TooManyRequestsProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.TooManyRequestsProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode == 500:
 		res.Headers = httpRes.Header
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.InternalServerErrorProblemDetail
+			var out sdkerrors.InternalServerErrorProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.InternalServerErrorProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -447,7 +442,7 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 				return nil, err
 			}
 
-			res.ExportFileByCommit200ApplicationJSONAny = out
+			res.TwoHundredApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/yaml`):
 			res.Body = rawBody
 		default:
@@ -458,12 +453,11 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.BadRequestProblemDetail
+			var out sdkerrors.BadRequestProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.BadRequestProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -472,12 +466,11 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.UnauthorizedProblemDetail
+			var out sdkerrors.UnauthorizedProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.UnauthorizedProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -486,12 +479,11 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.PaymentRequiredProblemDetail
+			var out sdkerrors.PaymentRequiredProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.PaymentRequiredProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -500,12 +492,11 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.ForbiddenProblemDetail
+			var out sdkerrors.ForbiddenProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.ForbiddenProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -514,12 +505,11 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.NotFoundProblemDetail
+			var out sdkerrors.NotFoundProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.NotFoundProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -528,12 +518,11 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.ConflictProblemDetail
+			var out sdkerrors.ConflictProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.ConflictProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -542,12 +531,11 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.ExportFileFailedProblemDetail
+			var out sdkerrors.ExportFileFailedProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.ExportFileFailedProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -556,26 +544,28 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.TooManyRequestsProblemDetail
+			var out sdkerrors.TooManyRequestsProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.TooManyRequestsProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		fallthrough
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode == 500:
 		res.Headers = httpRes.Header
 
 		switch {
 		case utils.MatchContentType(contentType, `application/problem+json`):
-			var out shared.InternalServerErrorProblemDetail
+			var out sdkerrors.InternalServerErrorProblemDetail
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
-
-			res.InternalServerErrorProblemDetail = &out
+			return nil, &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

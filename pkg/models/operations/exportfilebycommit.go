@@ -5,39 +5,38 @@ package operations
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/speakeasy-sdks/naumanali/pkg/models/shared"
-	"github.com/speakeasy-sdks/naumanali/pkg/utils"
+	"github.com/speakeasy-sdks/naumanali/v2/pkg/utils"
 	"net/http"
 )
 
-// ExportFileByCommitStoplightVersionStoplightAPIVersionString - A string representing the Stoplight API version that is being requested. If not supplied: TODO document policy
-type ExportFileByCommitStoplightVersionStoplightAPIVersionString string
+// HeaderStoplightAPIVersionString - A string representing the Stoplight API version that is being requested. If not supplied: TODO document policy
+type HeaderStoplightAPIVersionString string
 
 const (
-	ExportFileByCommitStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205 ExportFileByCommitStoplightVersionStoplightAPIVersionString = "2022-12-05"
+	HeaderStoplightAPIVersionStringTwoThousandAndTwentyTwo1205 HeaderStoplightAPIVersionString = "2022-12-05"
 )
 
-func (e ExportFileByCommitStoplightVersionStoplightAPIVersionString) ToPointer() *ExportFileByCommitStoplightVersionStoplightAPIVersionString {
+func (e HeaderStoplightAPIVersionString) ToPointer() *HeaderStoplightAPIVersionString {
 	return &e
 }
 
-func (e *ExportFileByCommitStoplightVersionStoplightAPIVersionString) UnmarshalJSON(data []byte) error {
+func (e *HeaderStoplightAPIVersionString) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "2022-12-05":
-		*e = ExportFileByCommitStoplightVersionStoplightAPIVersionString(v)
+		*e = HeaderStoplightAPIVersionString(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ExportFileByCommitStoplightVersionStoplightAPIVersionString: %v", v)
+		return fmt.Errorf("invalid value for HeaderStoplightAPIVersionString: %v", v)
 	}
 }
 
 type ExportFileByCommitRequest struct {
 	// A string representing the Stoplight API version that is being requested. If not supplied: TODO document policy
-	StoplightVersion *ExportFileByCommitStoplightVersionStoplightAPIVersionString `header:"style=simple,explode=false,name=Stoplight-Version"`
+	StoplightVersion *HeaderStoplightAPIVersionString `header:"style=simple,explode=false,name=Stoplight-Version"`
 	// A reference to a commit or change in a Stoplight project.
 	CommitHash string `pathParam:"style=simple,explode=false,name=commit_hash"`
 	// A path to a file in a Stoplight project. Use forward slashes (`/`) to separate path directories.
@@ -59,7 +58,7 @@ func (e *ExportFileByCommitRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ExportFileByCommitRequest) GetStoplightVersion() *ExportFileByCommitStoplightVersionStoplightAPIVersionString {
+func (o *ExportFileByCommitRequest) GetStoplightVersion() *HeaderStoplightAPIVersionString {
 	if o == nil {
 		return nil
 	}
@@ -95,41 +94,23 @@ func (o *ExportFileByCommitRequest) GetProjectID() string {
 }
 
 type ExportFileByCommitResponse struct {
-	// The server could not understand the request due to invalid syntax.
-	BadRequestProblemDetail *shared.BadRequestProblemDetail
-	Body                    []byte
-	// This response is sent when a request conflicts with the current state of the server.
-	ConflictProblemDetail *shared.ConflictProblemDetail
+	// The exported OpenAPI or JSON Schema file.
+	TwoHundredApplicationJSONAny interface{}
+	Body                         []byte
 	// HTTP response content type for this operation
 	ContentType string
-	// The server could not export the file contents requested.
-	ExportFileFailedProblemDetail *shared.ExportFileFailedProblemDetail
-	// The client does not have permissions to access the content.
-	ForbiddenProblemDetail *shared.ForbiddenProblemDetail
-	Headers                map[string][]string
-	// The server has encountered a situation it doesn't know how to handle.
-	InternalServerErrorProblemDetail *shared.InternalServerErrorProblemDetail
-	// The server can not find the requested resource.
-	NotFoundProblemDetail *shared.NotFoundProblemDetail
-	// The client needs to provide payment to access the request content.
-	PaymentRequiredProblemDetail *shared.PaymentRequiredProblemDetail
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// This response is sent when the client has exhausted the request quota.
-	TooManyRequestsProblemDetail *shared.TooManyRequestsProblemDetail
-	// The client must authenticate itself to get the requested response.
-	UnauthorizedProblemDetail *shared.UnauthorizedProblemDetail
-	// The exported OpenAPI or JSON Schema file.
-	ExportFileByCommit200ApplicationJSONAny interface{}
 }
 
-func (o *ExportFileByCommitResponse) GetBadRequestProblemDetail() *shared.BadRequestProblemDetail {
+func (o *ExportFileByCommitResponse) GetTwoHundredApplicationJSONAny() interface{} {
 	if o == nil {
 		return nil
 	}
-	return o.BadRequestProblemDetail
+	return o.TwoHundredApplicationJSONAny
 }
 
 func (o *ExportFileByCommitResponse) GetBody() []byte {
@@ -139,13 +120,6 @@ func (o *ExportFileByCommitResponse) GetBody() []byte {
 	return o.Body
 }
 
-func (o *ExportFileByCommitResponse) GetConflictProblemDetail() *shared.ConflictProblemDetail {
-	if o == nil {
-		return nil
-	}
-	return o.ConflictProblemDetail
-}
-
 func (o *ExportFileByCommitResponse) GetContentType() string {
 	if o == nil {
 		return ""
@@ -153,46 +127,11 @@ func (o *ExportFileByCommitResponse) GetContentType() string {
 	return o.ContentType
 }
 
-func (o *ExportFileByCommitResponse) GetExportFileFailedProblemDetail() *shared.ExportFileFailedProblemDetail {
-	if o == nil {
-		return nil
-	}
-	return o.ExportFileFailedProblemDetail
-}
-
-func (o *ExportFileByCommitResponse) GetForbiddenProblemDetail() *shared.ForbiddenProblemDetail {
-	if o == nil {
-		return nil
-	}
-	return o.ForbiddenProblemDetail
-}
-
 func (o *ExportFileByCommitResponse) GetHeaders() map[string][]string {
 	if o == nil {
 		return nil
 	}
 	return o.Headers
-}
-
-func (o *ExportFileByCommitResponse) GetInternalServerErrorProblemDetail() *shared.InternalServerErrorProblemDetail {
-	if o == nil {
-		return nil
-	}
-	return o.InternalServerErrorProblemDetail
-}
-
-func (o *ExportFileByCommitResponse) GetNotFoundProblemDetail() *shared.NotFoundProblemDetail {
-	if o == nil {
-		return nil
-	}
-	return o.NotFoundProblemDetail
-}
-
-func (o *ExportFileByCommitResponse) GetPaymentRequiredProblemDetail() *shared.PaymentRequiredProblemDetail {
-	if o == nil {
-		return nil
-	}
-	return o.PaymentRequiredProblemDetail
 }
 
 func (o *ExportFileByCommitResponse) GetStatusCode() int {
@@ -207,25 +146,4 @@ func (o *ExportFileByCommitResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *ExportFileByCommitResponse) GetTooManyRequestsProblemDetail() *shared.TooManyRequestsProblemDetail {
-	if o == nil {
-		return nil
-	}
-	return o.TooManyRequestsProblemDetail
-}
-
-func (o *ExportFileByCommitResponse) GetUnauthorizedProblemDetail() *shared.UnauthorizedProblemDetail {
-	if o == nil {
-		return nil
-	}
-	return o.UnauthorizedProblemDetail
-}
-
-func (o *ExportFileByCommitResponse) GetExportFileByCommit200ApplicationJSONAny() interface{} {
-	if o == nil {
-		return nil
-	}
-	return o.ExportFileByCommit200ApplicationJSONAny
 }

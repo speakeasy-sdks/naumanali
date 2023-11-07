@@ -29,9 +29,9 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/naumanali"
-	"github.com/speakeasy-sdks/naumanali/pkg/models/shared"
-	"github.com/speakeasy-sdks/naumanali/pkg/models/operations"
+	naumanali "github.com/speakeasy-sdks/naumanali/v2"
+	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
+	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
 )
 
 func main() {
@@ -40,8 +40,8 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Apitest.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
-        StoplightVersion: operations.ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
+    res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
+        StoplightVersion: operations.StoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
         BranchName: "string",
         FilePath: "/etc/namedb/radian_southeast.csp",
         ProjectID: "string",
@@ -50,7 +50,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.ExportFileByBranch200ApplicationJSONAny != nil {
+    if res.TwoHundredApplicationJSONAny != nil {
         // handle response
     }
 }
@@ -81,9 +81,9 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/naumanali"
-	"github.com/speakeasy-sdks/naumanali/pkg/models/shared"
-	"github.com/speakeasy-sdks/naumanali/pkg/models/operations"
+	naumanali "github.com/speakeasy-sdks/naumanali/v2"
+	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
+	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
 )
 
 func main() {
@@ -92,8 +92,8 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Apitest.ExportFileByCommit(ctx, operations.ExportFileByCommitRequest{
-        StoplightVersion: operations.ExportFileByCommitStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
+    res, err := s.ExportFileByCommit(ctx, operations.ExportFileByCommitRequest{
+        StoplightVersion: operations.HeaderStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
         CommitHash: "string",
         FilePath: "/etc/about.sgi",
         ProjectID: "string",
@@ -102,7 +102,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.ExportFileByCommit200ApplicationJSONAny != nil {
+    if res.TwoHundredApplicationJSONAny != nil {
         // handle response
     }
 }

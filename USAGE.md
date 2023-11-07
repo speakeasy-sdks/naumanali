@@ -6,9 +6,9 @@ package main
 
 import (
 	"context"
-	"github.com/speakeasy-sdks/naumanali"
-	"github.com/speakeasy-sdks/naumanali/pkg/models/operations"
-	"github.com/speakeasy-sdks/naumanali/pkg/models/shared"
+	naumanali "github.com/speakeasy-sdks/naumanali/v2"
+	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
+	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
 	"log"
 )
 
@@ -18,8 +18,8 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.Apitest.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
-		StoplightVersion: operations.ExportFileByBranchStoplightVersionStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
+	res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
+		StoplightVersion: operations.StoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
 		BranchName:       "string",
 		FilePath:         "/etc/namedb/radian_southeast.csp",
 		ProjectID:        "string",
@@ -28,7 +28,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if res.ExportFileByBranch200ApplicationJSONAny != nil {
+	if res.TwoHundredApplicationJSONAny != nil {
 		// handle response
 	}
 }
