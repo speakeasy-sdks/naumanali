@@ -58,16 +58,27 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.ExportFileByBranchRequest](../../models/operations/exportfilebybranchrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `request`                                                                                        | [operations.ExportFileByBranchRequest](../../pkg/models/operations/exportfilebybranchrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 
 
 ### Response
 
-**[*operations.ExportFileByBranchResponse](../../models/operations/exportfilebybranchresponse.md), error**
-
+**[*operations.ExportFileByBranchResponse](../../pkg/models/operations/exportfilebybranchresponse.md), error**
+| Error Object                               | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| sdkerrors.BadRequestProblemDetail          | 400                                        | application/problem+json                   |
+| sdkerrors.UnauthorizedProblemDetail        | 401                                        | application/problem+json                   |
+| sdkerrors.PaymentRequiredProblemDetail     | 402                                        | application/problem+json                   |
+| sdkerrors.ForbiddenProblemDetail           | 403                                        | application/problem+json                   |
+| sdkerrors.NotFoundProblemDetail            | 404                                        | application/problem+json                   |
+| sdkerrors.ConflictProblemDetail            | 409                                        | application/problem+json                   |
+| sdkerrors.ExportFileFailedProblemDetail    | 422                                        | application/problem+json                   |
+| sdkerrors.TooManyRequestsProblemDetail     | 429                                        | application/problem+json                   |
+| sdkerrors.InternalServerErrorProblemDetail | 500                                        | application/problem+json                   |
+| sdkerrors.SDKError                         | 400-600                                    | */*                                        |
 
 ## ExportFileByCommit
 
@@ -110,13 +121,24 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.ExportFileByCommitRequest](../../models/operations/exportfilebycommitrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `request`                                                                                        | [operations.ExportFileByCommitRequest](../../pkg/models/operations/exportfilebycommitrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 
 
 ### Response
 
-**[*operations.ExportFileByCommitResponse](../../models/operations/exportfilebycommitresponse.md), error**
-
+**[*operations.ExportFileByCommitResponse](../../pkg/models/operations/exportfilebycommitresponse.md), error**
+| Error Object                               | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| sdkerrors.BadRequestProblemDetail          | 400                                        | application/problem+json                   |
+| sdkerrors.UnauthorizedProblemDetail        | 401                                        | application/problem+json                   |
+| sdkerrors.PaymentRequiredProblemDetail     | 402                                        | application/problem+json                   |
+| sdkerrors.ForbiddenProblemDetail           | 403                                        | application/problem+json                   |
+| sdkerrors.NotFoundProblemDetail            | 404                                        | application/problem+json                   |
+| sdkerrors.ConflictProblemDetail            | 409                                        | application/problem+json                   |
+| sdkerrors.ExportFileFailedProblemDetail    | 422                                        | application/problem+json                   |
+| sdkerrors.TooManyRequestsProblemDetail     | 429                                        | application/problem+json                   |
+| sdkerrors.InternalServerErrorProblemDetail | 500                                        | application/problem+json                   |
+| sdkerrors.SDKError                         | 400-600                                    | */*                                        |

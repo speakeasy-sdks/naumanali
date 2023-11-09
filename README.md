@@ -83,7 +83,20 @@ Here's an example of one such pagination call:
 <!-- Start Error Handling -->
 # Error Handling
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+
+| Error Object                               | Status Code                                | Content Type                               |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| sdkerrors.BadRequestProblemDetail          | 400                                        | application/problem+json                   |
+| sdkerrors.UnauthorizedProblemDetail        | 401                                        | application/problem+json                   |
+| sdkerrors.PaymentRequiredProblemDetail     | 402                                        | application/problem+json                   |
+| sdkerrors.ForbiddenProblemDetail           | 403                                        | application/problem+json                   |
+| sdkerrors.NotFoundProblemDetail            | 404                                        | application/problem+json                   |
+| sdkerrors.ConflictProblemDetail            | 409                                        | application/problem+json                   |
+| sdkerrors.ExportFileFailedProblemDetail    | 422                                        | application/problem+json                   |
+| sdkerrors.TooManyRequestsProblemDetail     | 429                                        | application/problem+json                   |
+| sdkerrors.InternalServerErrorProblemDetail | 500                                        | application/problem+json                   |
+| sdkerrors.SDKError                         | 400-600                                    | */*                                        |
 
 
 ## Example
@@ -167,6 +180,11 @@ func main() {
 			log.Fatal(e.Error())
 		}
 
+		var e *sdkerrors.SDKError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
 	}
 }
 
@@ -298,12 +316,11 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 
 <!-- Start Authentication -->
-
 # Authentication
 
 ## Per-Client Security Schemes
 
-Your SDK supports the following security scheme globally:
+This SDK supports the following security scheme globally:
 
 | Name            | Type            | Scheme          |
 | --------------- | --------------- | --------------- |
