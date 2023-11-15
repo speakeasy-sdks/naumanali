@@ -35,9 +35,7 @@ import(
 )
 
 func main() {
-    s := naumanali.New(
-        naumanali.WithSecurity(""),
-    )
+    s := naumanali.New()
 
     ctx := context.Background()
     res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
@@ -98,9 +96,7 @@ import(
 )
 
 func main() {
-    s := naumanali.New(
-        naumanali.WithSecurity(""),
-    )
+    s := naumanali.New()
 
     ctx := context.Background()
     res, err := s.ExportFileByCommit(ctx, operations.ExportFileByCommitRequest{

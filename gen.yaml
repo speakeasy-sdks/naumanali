@@ -2,20 +2,23 @@ configVersion: 1.0.0
 management:
   docChecksum: 7cdfa2f8b7b1e64ebe3b401c30f6f19f
   docVersion: "2022-12-05"
-  speakeasyVersion: 1.116.0
-  generationVersion: 2.185.0
+  speakeasyVersion: 1.120.1
+  generationVersion: 2.189.1
 generation:
   comments: {}
   sdkClassName: apitest
   repoURL: https://github.com/speakeasy-sdks/naumanali.git
+  usageSnippets:
+    optionalPropertyRendering: withExample
 features:
   go:
     constsAndDefaults: 0.1.1
-    core: 3.1.2
+    core: 3.1.4
     globalSecurity: 2.82.2
     globalServerURLs: 2.82.0
+    methodSecurity: 2.82.1
 go:
-  version: 2.0.1
+  version: 2.0.2
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   imports:

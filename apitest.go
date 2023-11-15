@@ -142,9 +142,9 @@ func New(opts ...SDKOption) *Apitest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-12-05",
-			SDKVersion:        "2.0.1",
-			GenVersion:        "2.185.0",
-			UserAgent:         "speakeasy-sdk/go 2.0.1 2.185.0 2022-12-05 github.com/speakeasy-sdks/naumanali",
+			SDKVersion:        "2.0.2",
+			GenVersion:        "2.189.1",
+			UserAgent:         "speakeasy-sdk/go 2.0.2 2.189.1 2022-12-05 github.com/speakeasy-sdks/naumanali",
 		},
 	}
 	for _, opt := range opts {
@@ -203,7 +203,7 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -407,7 +407,7 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.sdkConfiguration.DefaultClient
 
 	httpRes, err := client.Do(req)
 	if err != nil {
