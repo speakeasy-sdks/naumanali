@@ -27,15 +27,17 @@ Exports an OpenAPI or JSON Schema file from a Stoplight project that exists on t
 package main
 
 import(
-	"context"
-	"log"
-	naumanali "github.com/speakeasy-sdks/naumanali/v2"
 	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
+	naumanali "github.com/speakeasy-sdks/naumanali/v2"
+	"context"
 	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
-    s := naumanali.New()
+    s := naumanali.New(
+        naumanali.WithSecurity(""),
+    )
 
     ctx := context.Background()
     res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
@@ -88,15 +90,17 @@ Exports an OpenAPI or JSON Schema file from a Stoplight project that exists on t
 package main
 
 import(
-	"context"
-	"log"
-	naumanali "github.com/speakeasy-sdks/naumanali/v2"
 	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
+	naumanali "github.com/speakeasy-sdks/naumanali/v2"
+	"context"
 	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
+	"log"
 )
 
 func main() {
-    s := naumanali.New()
+    s := naumanali.New(
+        naumanali.WithSecurity(""),
+    )
 
     ctx := context.Background()
     res, err := s.ExportFileByCommit(ctx, operations.ExportFileByCommitRequest{

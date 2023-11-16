@@ -129,7 +129,7 @@ func (o *ExportFileByCommitResponse) GetContentType() string {
 
 func (o *ExportFileByCommitResponse) GetHeaders() map[string][]string {
 	if o == nil {
-		return nil
+		return map[string][]string{}
 	}
 	return o.Headers
 }

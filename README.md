@@ -24,7 +24,9 @@ import (
 )
 
 func main() {
-	s := naumanali.New()
+	s := naumanali.New(
+		naumanali.WithSecurity(""),
+	)
 
 	ctx := context.Background()
 	res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
@@ -105,14 +107,18 @@ package main
 
 import (
 	"context"
+	"errors"
 	naumanali "github.com/speakeasy-sdks/naumanali/v2"
 	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
+	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
 	"log"
 )
 
 func main() {
-	s := naumanali.New()
+	s := naumanali.New(
+		naumanali.WithSecurity(""),
+	)
 
 	ctx := context.Background()
 	res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
@@ -217,6 +223,7 @@ import (
 func main() {
 	s := naumanali.New(
 		naumanali.WithServerIndex(0),
+		naumanali.WithSecurity(""),
 	)
 
 	ctx := context.Background()
@@ -255,6 +262,7 @@ import (
 func main() {
 	s := naumanali.New(
 		naumanali.WithServerURL("https://api.stoplight.io"),
+		naumanali.WithSecurity(""),
 	)
 
 	ctx := context.Background()
@@ -328,7 +336,6 @@ import (
 	"context"
 	naumanali "github.com/speakeasy-sdks/naumanali/v2"
 	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
 	"log"
 )
 

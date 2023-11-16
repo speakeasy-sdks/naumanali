@@ -11,7 +11,9 @@ import (
 )
 
 func main() {
-	s := naumanali.New()
+	s := naumanali.New(
+		naumanali.WithSecurity(""),
+	)
 
 	ctx := context.Background()
 	res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
