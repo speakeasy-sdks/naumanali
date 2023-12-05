@@ -43,7 +43,7 @@ func main() {
     res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
         StoplightVersion: operations.StoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
         BranchName: "string",
-        FilePath: "/etc/namedb/radian_southeast.csp",
+        FilePath: "/opt/lib/bronze_override_yuck.rmvb",
         ProjectID: "string",
     })
     if err != nil {
@@ -106,7 +106,7 @@ func main() {
     res, err := s.ExportFileByCommit(ctx, operations.ExportFileByCommitRequest{
         StoplightVersion: operations.HeaderStoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
         CommitHash: "string",
-        FilePath: "/etc/about.sgi",
+        FilePath: "/lib/jose_jewelery_east.oxt",
         ProjectID: "string",
     })
     if err != nil {

@@ -32,7 +32,6 @@ pkg/utils/utils.go
 /pkg/models/shared/invalidparameter.go
 /pkg/models/shared/exportproblem.go
 /pkg/models/shared/security.go
-USAGE.md
 docs/pkg/models/operations/stoplightapiversionstring.md
 docs/pkg/models/operations/exportfilebybranchrequest.md
 docs/pkg/models/operations/exportfilebybranchresponse.md
@@ -62,5 +61,6 @@ docs/pkg/models/shared/invalidparameter.md
 docs/pkg/models/shared/exportproblem.md
 docs/pkg/models/shared/security.md
 docs/sdks/apitest/README.md
+USAGE.md
 pkg/models/operations/options.go
 .gitattributes

@@ -1,4 +1,4 @@
-<!-- Start SDK Example Usage -->
+<!-- Start SDK Example Usage [usage] -->
 ```go
 package main
 
@@ -19,7 +19,7 @@ func main() {
 	res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
 		StoplightVersion: operations.StoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
 		BranchName:       "string",
-		FilePath:         "/etc/namedb/radian_southeast.csp",
+		FilePath:         "/opt/lib/bronze_override_yuck.rmvb",
 		ProjectID:        "string",
 	})
 	if err != nil {
@@ -32,4 +32,4 @@ func main() {
 }
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->
