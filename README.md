@@ -26,7 +26,7 @@ import (
 
 func main() {
 	s := naumanali.New(
-		naumanali.WithSecurity(""),
+		naumanali.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -106,7 +106,7 @@ import (
 
 func main() {
 	s := naumanali.New(
-		naumanali.WithSecurity(""),
+		naumanali.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -212,7 +212,7 @@ import (
 func main() {
 	s := naumanali.New(
 		naumanali.WithServerIndex(0),
-		naumanali.WithSecurity(""),
+		naumanali.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -251,7 +251,7 @@ import (
 func main() {
 	s := naumanali.New(
 		naumanali.WithServerURL("https://api.stoplight.io"),
-		naumanali.WithSecurity(""),
+		naumanali.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	ctx := context.Background()
@@ -330,7 +330,7 @@ import (
 
 func main() {
 	s := naumanali.New(
-		naumanali.WithSecurity(""),
+		naumanali.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	ctx := context.Background()
