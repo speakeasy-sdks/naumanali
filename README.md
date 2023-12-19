@@ -87,7 +87,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 | sdkerrors.ExportFileFailedProblemDetail    | 422                                        | application/problem+json                   |
 | sdkerrors.TooManyRequestsProblemDetail     | 429                                        | application/problem+json                   |
 | sdkerrors.InternalServerErrorProblemDetail | 500                                        | application/problem+json                   |
-| sdkerrors.SDKError                         | 400-600                                    | */*                                        |
+| sdkerrors.SDKError                         | 4xx-5xx                                    | */*                                        |
 
 ### Example
 
