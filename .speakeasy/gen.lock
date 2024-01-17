@@ -4,9 +4,9 @@ management:
   docChecksum: 7cdfa2f8b7b1e64ebe3b401c30f6f19f
   docVersion: "2022-12-05"
   speakeasyVersion: internal
-  generationVersion: 2.225.2
-  releaseVersion: 2.1.1
-  configChecksum: 08a38f71f153361fc8808191e22aecc1
+  generationVersion: 2.234.3
+  releaseVersion: 2.1.2
+  configChecksum: 5e6a87a553890d831a4142ae92a305ea
   repoURL: https://github.com/speakeasy-sdks/naumanali.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/naumanali
@@ -14,7 +14,7 @@ management:
 features:
   go:
     constsAndDefaults: 0.1.2
-    core: 3.3.0
+    core: 3.3.1
     globalSecurity: 2.82.3
     globalServerURLs: 2.82.1
 generatedFiles:
