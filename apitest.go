@@ -129,6 +129,15 @@ func WithSecurity(authorization string) SDKOption {
 	}
 }
 
+// WithSecuritySource configures the SDK to invoke the Security Source function on each method call to determine authentication
+func WithSecuritySource(security func(context.Context) (shared.Security, error)) SDKOption {
+	return func(sdk *Apitest) {
+		sdk.sdkConfiguration.Security = func(ctx context.Context) (interface{}, error) {
+			return security(ctx)
+		}
+	}
+}
+
 func WithRetryConfig(retryConfig utils.RetryConfig) SDKOption {
 	return func(sdk *Apitest) {
 		sdk.sdkConfiguration.RetryConfig = &retryConfig
@@ -141,9 +150,9 @@ func New(opts ...SDKOption) *Apitest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-12-05",
-			SDKVersion:        "2.1.3",
-			GenVersion:        "2.237.2",
-			UserAgent:         "speakeasy-sdk/go 2.1.3 2.237.2 2022-12-05 github.com/speakeasy-sdks/naumanali",
+			SDKVersion:        "2.1.4",
+			GenVersion:        "2.245.1",
+			UserAgent:         "speakeasy-sdk/go 2.1.4 2.245.1 2022-12-05 github.com/speakeasy-sdks/naumanali",
 		},
 	}
 	for _, opt := range opts {
