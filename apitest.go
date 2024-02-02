@@ -6,10 +6,10 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/utils"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/shared"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/utils"
 	"io"
 	"net/http"
 	"time"
@@ -150,9 +150,9 @@ func New(opts ...SDKOption) *Apitest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-12-05",
-			SDKVersion:        "2.1.4",
-			GenVersion:        "2.245.1",
-			UserAgent:         "speakeasy-sdk/go 2.1.4 2.245.1 2022-12-05 github.com/speakeasy-sdks/naumanali",
+			SDKVersion:        "3.0.0",
+			GenVersion:        "2.248.1",
+			UserAgent:         "speakeasy-sdk/go 3.0.0 2.248.1 2022-12-05 github.com/speakeasy-sdks/naumanali",
 		},
 	}
 	for _, opt := range opts {

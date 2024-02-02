@@ -5,7 +5,7 @@ package operations
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/utils"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/utils"
 	"net/http"
 )
 

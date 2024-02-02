@@ -4,9 +4,9 @@ package main
 
 import (
 	"context"
-	naumanali "github.com/speakeasy-sdks/naumanali/v2"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
+	naumanali "github.com/speakeasy-sdks/naumanali/v3"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/shared"
 	"log"
 )
 

@@ -1,4 +1,4 @@
-module github.com/speakeasy-sdks/naumanali/v2
+module github.com/speakeasy-sdks/naumanali/v3
 
 go 1.20
 

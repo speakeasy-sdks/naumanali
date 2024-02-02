@@ -18,9 +18,9 @@ package main
 
 import (
 	"context"
-	naumanali "github.com/speakeasy-sdks/naumanali/v2"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
+	naumanali "github.com/speakeasy-sdks/naumanali/v3"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/shared"
 	"log"
 )
 
@@ -97,10 +97,10 @@ package main
 import (
 	"context"
 	"errors"
-	naumanali "github.com/speakeasy-sdks/naumanali/v2"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/sdkerrors"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
+	naumanali "github.com/speakeasy-sdks/naumanali/v3"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/shared"
 	"log"
 )
 
@@ -203,9 +203,9 @@ package main
 
 import (
 	"context"
-	naumanali "github.com/speakeasy-sdks/naumanali/v2"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
+	naumanali "github.com/speakeasy-sdks/naumanali/v3"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/shared"
 	"log"
 )
 
@@ -242,9 +242,9 @@ package main
 
 import (
 	"context"
-	naumanali "github.com/speakeasy-sdks/naumanali/v2"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
+	naumanali "github.com/speakeasy-sdks/naumanali/v3"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/operations"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/shared"
 	"log"
 )
 
@@ -323,8 +323,8 @@ package main
 
 import (
 	"context"
-	naumanali "github.com/speakeasy-sdks/naumanali/v2"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
+	naumanali "github.com/speakeasy-sdks/naumanali/v3"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/operations"
 	"log"
 )
 

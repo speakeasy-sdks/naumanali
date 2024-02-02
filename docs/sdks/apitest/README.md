@@ -27,10 +27,10 @@ Exports an OpenAPI or JSON Schema file from a Stoplight project that exists on t
 package main
 
 import(
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
-	naumanali "github.com/speakeasy-sdks/naumanali/v2"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/shared"
+	naumanali "github.com/speakeasy-sdks/naumanali/v3"
 	"context"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/operations"
 	"log"
 )
 
@@ -90,10 +90,10 @@ Exports an OpenAPI or JSON Schema file from a Stoplight project that exists on t
 package main
 
 import(
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/shared"
-	naumanali "github.com/speakeasy-sdks/naumanali/v2"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/shared"
+	naumanali "github.com/speakeasy-sdks/naumanali/v3"
 	"context"
-	"github.com/speakeasy-sdks/naumanali/v2/pkg/models/operations"
+	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/operations"
 	"log"
 )
 
