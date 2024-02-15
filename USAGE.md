@@ -18,9 +18,9 @@ func main() {
 	ctx := context.Background()
 	res, err := s.ExportFileByBranch(ctx, operations.ExportFileByBranchRequest{
 		StoplightVersion: operations.StoplightAPIVersionStringTwoThousandAndTwentyTwo1205.ToPointer(),
-		BranchName:       "string",
+		BranchName:       "<value>",
 		FilePath:         "/opt/lib/bronze_override_yuck.rmvb",
-		ProjectID:        "string",
+		ProjectID:        "<value>",
 	})
 	if err != nil {
 		log.Fatal(err)

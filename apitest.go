@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/naumanali/v3/internal/hooks"
 	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/operations"
 	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/naumanali/v3/pkg/models/shared"
@@ -55,6 +56,7 @@ type sdkConfiguration struct {
 	GenVersion        string
 	UserAgent         string
 	RetryConfig       *utils.RetryConfig
+	Hooks             *hooks.Hooks
 }
 
 func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
@@ -150,14 +152,17 @@ func New(opts ...SDKOption) *Apitest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-12-05",
-			SDKVersion:        "3.0.1",
-			GenVersion:        "2.250.2",
-			UserAgent:         "speakeasy-sdk/go 3.0.1 2.250.2 2022-12-05 github.com/speakeasy-sdks/naumanali",
+			SDKVersion:        "3.1.0",
+			GenVersion:        "2.258.2",
+			UserAgent:         "speakeasy-sdk/go 3.1.0 2.258.2 2022-12-05 github.com/speakeasy-sdks/naumanali",
+			Hooks:             hooks.New(),
 		},
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
+
+	sdk.sdkConfiguration.DefaultClient = sdk.sdkConfiguration.Hooks.ClientInit(sdk.sdkConfiguration.DefaultClient)
 
 	// Use WithClient to override the default client if you would like to customize the timeout
 	if sdk.sdkConfiguration.DefaultClient == nil {
@@ -177,6 +182,8 @@ func New(opts ...SDKOption) *Apitest {
 // ExportFileByBranch - exportFileByBranch
 // Exports an OpenAPI or JSON Schema file from a Stoplight project that exists on the specified branch.
 func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.ExportFileByBranchRequest, opts ...operations.Option) (*operations.ExportFileByBranchResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "exportFileByBranch"}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionAcceptHeaderOverride,
@@ -188,12 +195,12 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 		}
 	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/projects/{project_id}/branches/{branch_name}/export/{file_path}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/projects/{project_id}/branches/{branch_name}/export/{file_path}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
@@ -203,7 +210,7 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 		req.Header.Set("Accept", "application/json;q=1, application/problem+json;q=0.7, application/yaml;q=0")
 	}
 
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
 
@@ -213,12 +220,31 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
+		return nil, err
 	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+
+	httpRes, err := client.Do(req)
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"400", "401", "402", "403", "404", "409", "422", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -235,6 +261,7 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		res.Headers = httpRes.Header
@@ -381,6 +408,8 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 // ExportFileByCommit - exportFileByCommit
 // Exports an OpenAPI or JSON Schema file from a Stoplight project that exists on the specified commit.
 func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.ExportFileByCommitRequest, opts ...operations.Option) (*operations.ExportFileByCommitResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "exportFileByCommit"}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionAcceptHeaderOverride,
@@ -392,12 +421,12 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 		}
 	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/projects/{project_id}/commits/{commit_hash}/export/{file_path}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/projects/{project_id}/commits/{commit_hash}/export/{file_path}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
@@ -407,7 +436,7 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 		req.Header.Set("Accept", "application/json;q=1, application/problem+json;q=0.7, application/yaml;q=0")
 	}
 
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
 
@@ -417,12 +446,31 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
+		return nil, err
 	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+
+	httpRes, err := client.Do(req)
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"400", "401", "402", "403", "404", "409", "422", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -439,6 +487,7 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		res.Headers = httpRes.Header
