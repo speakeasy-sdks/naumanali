@@ -152,9 +152,9 @@ func New(opts ...SDKOption) *Apitest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-12-05",
-			SDKVersion:        "3.1.0",
-			GenVersion:        "2.258.2",
-			UserAgent:         "speakeasy-sdk/go 3.1.0 2.258.2 2022-12-05 github.com/speakeasy-sdks/naumanali",
+			SDKVersion:        "3.1.1",
+			GenVersion:        "2.263.3",
+			UserAgent:         "speakeasy-sdk/go 3.1.1 2.263.3 2022-12-05 github.com/speakeasy-sdks/naumanali",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -218,12 +218,12 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -246,7 +246,6 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.ExportFileByBranchResponse{
@@ -444,12 +443,12 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -472,7 +471,6 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.ExportFileByCommitResponse{
