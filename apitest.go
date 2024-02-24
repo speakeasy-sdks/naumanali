@@ -119,7 +119,7 @@ func WithClient(client HTTPClient) SDKOption {
 
 func withSecurity(security interface{}) func(context.Context) (interface{}, error) {
 	return func(context.Context) (interface{}, error) {
-		return &security, nil
+		return security, nil
 	}
 }
 
@@ -152,9 +152,9 @@ func New(opts ...SDKOption) *Apitest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-12-05",
-			SDKVersion:        "3.1.1",
-			GenVersion:        "2.263.3",
-			UserAgent:         "speakeasy-sdk/go 3.1.1 2.263.3 2022-12-05 github.com/speakeasy-sdks/naumanali",
+			SDKVersion:        "3.1.2",
+			GenVersion:        "2.272.4",
+			UserAgent:         "speakeasy-sdk/go 3.1.2 2.272.4 2022-12-05 github.com/speakeasy-sdks/naumanali",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -162,12 +162,18 @@ func New(opts ...SDKOption) *Apitest {
 		opt(sdk)
 	}
 
-	sdk.sdkConfiguration.DefaultClient = sdk.sdkConfiguration.Hooks.ClientInit(sdk.sdkConfiguration.DefaultClient)
-
 	// Use WithClient to override the default client if you would like to customize the timeout
 	if sdk.sdkConfiguration.DefaultClient == nil {
 		sdk.sdkConfiguration.DefaultClient = &http.Client{Timeout: 60 * time.Second}
 	}
+
+	currentServerURL, _ := sdk.sdkConfiguration.GetServerDetails()
+	serverURL := currentServerURL
+	serverURL, sdk.sdkConfiguration.DefaultClient = sdk.sdkConfiguration.Hooks.SDKInit(currentServerURL, sdk.sdkConfiguration.DefaultClient)
+	if serverURL != currentServerURL {
+		sdk.sdkConfiguration.ServerURL = serverURL
+	}
+
 	if sdk.sdkConfiguration.SecurityClient == nil {
 		if sdk.sdkConfiguration.Security != nil {
 			sdk.sdkConfiguration.SecurityClient = utils.ConfigureSecurityClient(sdk.sdkConfiguration.DefaultClient, sdk.sdkConfiguration.Security)
@@ -182,7 +188,11 @@ func New(opts ...SDKOption) *Apitest {
 // ExportFileByBranch - exportFileByBranch
 // Exports an OpenAPI or JSON Schema file from a Stoplight project that exists on the specified branch.
 func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.ExportFileByBranchRequest, opts ...operations.Option) (*operations.ExportFileByBranchResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "exportFileByBranch"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "exportFileByBranch",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -218,12 +228,12 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -233,15 +243,15 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "402", "403", "404", "409", "422", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -407,7 +417,11 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 // ExportFileByCommit - exportFileByCommit
 // Exports an OpenAPI or JSON Schema file from a Stoplight project that exists on the specified commit.
 func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.ExportFileByCommitRequest, opts ...operations.Option) (*operations.ExportFileByCommitResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "exportFileByCommit"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "exportFileByCommit",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -443,12 +457,12 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -458,15 +472,15 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "402", "403", "404", "409", "422", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
