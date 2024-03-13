@@ -3,10 +3,10 @@ id: b2cbf03b-5653-4edf-9733-4348310011a6
 management:
   docChecksum: 7cdfa2f8b7b1e64ebe3b401c30f6f19f
   docVersion: "2022-12-05"
-  speakeasyVersion: 1.204.1
-  generationVersion: 2.279.1
-  releaseVersion: 3.2.0
-  configChecksum: b85524378920923e68ff73c4c4518a51
+  speakeasyVersion: 1.207.1
+  generationVersion: 2.280.6
+  releaseVersion: 3.2.1
+  configChecksum: 47ba9c72ef8a2fa3780fd9cf6cb091b9
   repoURL: https://github.com/speakeasy-sdks/naumanali.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/naumanali
@@ -16,7 +16,7 @@ features:
     constsAndDefaults: 0.1.4
     core: 3.4.4
     globalSecurity: 2.82.8
-    globalServerURLs: 2.82.1
+    globalServerURLs: 2.82.2
     responseFormat: 0.1.0
 generatedFiles:
   - apitest.go
