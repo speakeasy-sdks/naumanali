@@ -151,9 +151,9 @@ func New(opts ...SDKOption) *Apitest {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-12-05",
-			SDKVersion:        "3.2.2",
-			GenVersion:        "2.283.1",
-			UserAgent:         "speakeasy-sdk/go 3.2.2 2.283.1 2022-12-05 github.com/speakeasy-sdks/naumanali",
+			SDKVersion:        "3.2.3",
+			GenVersion:        "2.291.0",
+			UserAgent:         "speakeasy-sdk/go 3.2.3 2.291.0 2022-12-05 github.com/speakeasy-sdks/naumanali",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -213,7 +213,7 @@ func (s *Apitest) ExportFileByBranch(ctx context.Context, request operations.Exp
 
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request)
+	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -455,7 +455,7 @@ func (s *Apitest) ExportFileByCommit(ctx context.Context, request operations.Exp
 
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request)
+	utils.PopulateHeaders(ctx, req, request, nil)
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
